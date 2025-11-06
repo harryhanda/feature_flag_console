@@ -1,0 +1,202 @@
+/* === Global Styles === */
+body {
+  background: #f9fafb;
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  color: #333;
+}
+
+.app-layout {
+  display: flex;
+  height: 100vh;
+}
+
+/* === Sidebar Layout === */
+.main {
+  flex: 1;
+  margin-left: 220px;
+  padding: 40px;
+  background: #f3f4f6;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.main.dark {
+  background: #1e293b;
+  color: #f1f5f9;
+}
+
+/* === Toolbar === */
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 15px;
+}
+
+.toolbar input {
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  font-size: 15px;
+  width: 300px;
+  outline: none;
+}
+
+.toolbar input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 4px rgba(37, 99, 235, 0.3);
+}
+
+/* === Feature Form === */
+.feature-form {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  margin-bottom: 25px;
+}
+
+.feature-form input,
+.feature-form textarea {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+}
+
+.feature-form input:focus,
+.feature-form textarea:focus {
+  border-color: #2563eb;
+}
+
+.feature-form textarea {
+  resize: none;
+  width: 200px;
+  height: 20px;
+}
+
+.feature-form button {
+  background: #111827;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.feature-form button:hover {
+  background: #2563eb;
+}
+
+/* === Feature List === */
+.features-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  position: relative;
+}
+
+.feature-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  transition: 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+}
+
+.feature-card h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #111827;
+}
+
+.feature-card p {
+  margin: 5px 0;
+  color: #555;
+  font-size: 0.9rem;
+}
+
+.feature-card small {
+  color: #6b7280;
+  font-size: 0.85rem;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+}
+
+.actions button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 1.3rem;
+  transition: transform 0.2s;
+}
+
+.actions button:hover {
+  transform: scale(1.15);
+}
+
+/* === Empty State === */
+p {
+  color: #dc2626;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* 🗑️ Floating Dustbin */
+.dustbin {
+  position: fixed;
+  bottom: 25px;
+  right: 40px;
+  font-size: 2rem;
+  opacity: 0.6;
+  z-index: 10;
+  transition: 0.3s;
+}
+
+.dustbin:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+/* 🌀 Delete Animation */
+.feature-card.exit {
+  transform-origin: right center;
+  animation: toBin 0.6s forwards;
+}
+
+@keyframes toBin {
+  0% {
+    opacity: 1;
+    transform: translateX(0) rotate(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(120px) rotate(20deg);
+  }
+}
+.features-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-bottom: 60px; /* spacing at bottom */
+  overflow-y: auto;
+  max-height: calc(100vh - 180px); /* adjusts to screen size */
+  scroll-behavior: smooth;
+}
