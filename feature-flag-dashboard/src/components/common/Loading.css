@@ -1,0 +1,158 @@
+/* ==========================================
+   Loading & Skeleton Animations
+   ========================================== */
+
+.ffc-spinner-container {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ffc-spinner {
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  animation: ffc-spin-anim 0.8s linear infinite;
+}
+
+.ffc-spinner-sm {
+  width: 14px;
+  height: 14px;
+  border-width: 1.5px;
+}
+
+.ffc-spinner-md {
+  width: 24px;
+  height: 24px;
+}
+
+.ffc-spinner-lg {
+  width: 40px;
+  height: 40px;
+  border-width: 3px;
+}
+
+/* Spinner Colors */
+.ffc-spinner-primary {
+  border-top-color: var(--accent);
+}
+
+.ffc-spinner-white {
+  border-top-color: var(--surface);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+@keyframes ffc-spin-anim {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.ffc-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+/* Skeletons */
+.ffc-skeleton-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+.ffc-skeleton-title {
+  height: 14px;
+  width: 40%;
+  border-radius: 4px;
+  background: var(--c-100);
+}
+
+.ffc-skeleton-value {
+  height: 28px;
+  width: 60%;
+  border-radius: 6px;
+  background: var(--c-100);
+}
+
+.ffc-skeleton-subtitle {
+  height: 12px;
+  width: 30%;
+  border-radius: 4px;
+  background: var(--c-100);
+}
+
+.ffc-skeleton-table {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.ffc-skeleton-table-header {
+  height: 32px;
+  border-radius: 6px;
+  background: var(--c-100);
+}
+
+.ffc-skeleton-table-row {
+  display: flex;
+  gap: 16px;
+}
+
+.ffc-skeleton-table-cell {
+  height: 20px;
+  flex: 1;
+  border-radius: 4px;
+  background: var(--page-bg);
+}
+
+/* Shimmer Animation */
+.ffc-skeleton-animate {
+  position: relative;
+  overflow: hidden;
+}
+
+.ffc-skeleton-animate::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  transform: translateX(-100%);
+  background-image: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.6) 20%,
+    rgba(255, 255, 255, 0.9) 60%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  animation: ffc-shimmer-anim 1.5s infinite;
+  content: "";
+}
+
+@keyframes ffc-shimmer-anim {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.ffc-loading-full {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  width: 100%;
+}

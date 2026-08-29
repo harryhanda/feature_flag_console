@@ -1,0 +1,181 @@
+/* ==========================================
+   Environments Styling
+   ========================================== */
+
+.ffc-environments-container {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.ffc-env-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.ffc-env-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ffc-env-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.06);
+}
+
+.ffc-env-card-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.ffc-env-card-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.ffc-env-card-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-transform: capitalize;
+  margin: 0;
+}
+
+.ffc-env-card-desc {
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin: 0 0 20px 0;
+  flex-grow: 1;
+}
+
+.ffc-env-card-divider {
+  height: 1px;
+  background: var(--c-100);
+  margin-bottom: 16px;
+}
+
+.ffc-env-card-metrics {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.ffc-env-metric {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ffc-env-metric-value {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.ffc-env-metric-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.ffc-env-card-note {
+  font-size: 11.5px;
+  color: var(--text-muted);
+  line-height: 1.4;
+  margin: -8px 0 16px 0;
+}
+
+.ffc-env-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--page-bg);
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--c-100);
+}
+
+.ffc-env-host-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--success);
+}
+
+.ffc-env-host {
+  font-size: 11px;
+  font-family: monospace;
+  color: var(--text-secondary);
+}
+
+/* Card borders and icons background colors */
+.ffc-env-card.border-dev { border-top: 4px solid var(--info); }
+.ffc-env-card.border-staging { border-top: 4px solid var(--warning); }
+.ffc-env-card.border-production { border-top: 4px solid var(--danger); }
+
+.bg-dev { background: rgba(8, 145, 178, 0.08); color: var(--info); }
+.bg-staging { background: rgba(217, 119, 6, 0.08); color: var(--warning); }
+.bg-production { background: rgba(220, 38, 38, 0.08); color: var(--danger); }
+
+/* Responsive tables styling */
+.ffc-responsive-table {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.ffc-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 13.5px;
+}
+
+.ffc-table th,
+.ffc-table td {
+  padding: 14px 24px;
+  border-bottom: 1px solid var(--c-100);
+}
+
+.ffc-table th {
+  background: var(--page-bg);
+  font-weight: 600;
+  color: var(--c-600);
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+}
+
+.ffc-table tbody tr:hover {
+  background: var(--page-bg);
+}
+
+.ffc-table-main-cell {
+  color: var(--text-primary);
+}
+
+/* Responsive environment layout */
+@media (max-width: 1024px) {
+  .ffc-env-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}

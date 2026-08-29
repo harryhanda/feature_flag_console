@@ -1,0 +1,21 @@
+.ffc-confirm-card {
+  max-width: 400px;
+}
+
+.ffc-confirm-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ffc-confirm-icon {
+  color: var(--danger);
+  flex-shrink: 0;
+}
+
+.ffc-confirm-message {
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin: 0;
+}

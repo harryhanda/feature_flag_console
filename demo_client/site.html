@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Netflix — Feature Flag Demo</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#080808;color:#fff;font-family:Arial,Helvetica,sans-serif;transition:background .5s}
+.header{position:fixed;top:0;left:0;right:0;z-index:20;height:68px;padding:0 42px;display:flex;align-items:center;background:linear-gradient(180deg,rgba(0,0,0,.95),rgba(0,0,0,.55),transparent)}
+.logo{font-size:29px;font-weight:900;letter-spacing:1px;color:#e50914}
+.nav{display:flex;gap:22px;margin-left:34px;font-size:13px;color:#ddd}
+.nav span:first-child{color:#fff;font-weight:700}
+.account{margin-left:auto;color:#ddd;font-size:13px}
+.hero{height:78vh;min-height:560px;position:relative;display:flex;align-items:flex-end;padding:0 44px 85px;background-image:url('the-witcher-season-3840x2160-24258.jpg');background-size:cover;background-position:center;overflow:hidden}
+.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.88),rgba(0,0,0,.35) 55%,rgba(0,0,0,.6)),linear-gradient(0deg,#080808 0%,transparent 42%);z-index:1}
+.hero-content{position:relative;z-index:3;max-width:580px}
+.kicker{font-size:13px;font-weight:700;letter-spacing:2px;color:#ddd}
+.hero h1{font-size:clamp(42px,6vw,72px);margin:12px 0 10px}
+.hero p{font-size:16px;line-height:1.55;color:#ddd;margin:0 0 22px}
+.buttons{display:flex;gap:10px}
+.btn{border:0;border-radius:5px;padding:12px 22px;font-size:15px;font-weight:700;cursor:pointer}
+.play{background:#fff;color:#111}.more{background:rgba(90,90,90,.8);color:#fff}
+#hero-video{display:none;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.feature-banner{display:none;text-align:center;padding:13px 20px;font-size:14px;font-weight:800}
+#premium-banner{background:#f1c40f;color:#111}
+#diwali-banner{background:linear-gradient(90deg,#5a1600,#9c5b00,#5a1600)}
+.section{padding:28px 42px 10px}
+.section h2{font-size:21px;margin:0 0 15px}
+.row{display:flex;gap:15px;overflow-x:auto;padding:3px 0 20px;scrollbar-width:thin}
+.card{flex:0 0 190px;height:270px;overflow:hidden;border-radius:5px;position:relative;background:#171717}
+.card img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .25s}
+.card:hover img{transform:scale(1.06)}
+.card .rank{position:absolute;left:8px;bottom:8px;background:rgba(0,0,0,.75);padding:4px 7px;border-radius:3px;font-size:11px}
+#beta-section{display:none}
+.diwali-glow{box-shadow:inset 0 0 100px rgba(255,165,0,.13)}
+#sparkles{display:none;position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none}
+footer{padding:35px 42px 55px;color:#777;font-size:12px}
+@media(max-width:700px){
+.header{padding:0 18px}.nav{display:none}.hero{padding:0 22px 65px;min-height:520px}
+.section{padding-left:20px;padding-right:20px}.card{flex-basis:155px;height:225px}
+.account{display:none}.hero p{font-size:14px}
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="logo">NETFLIX</div>
+  <nav class="nav"><span>Home</span><span>TV Shows</span><span>Movies</span><span>New & Popular</span></nav>
+  <div class="account">Demo Profile ▾</div>
+</header>
+
+<div id="diwali-banner" class="feature-banner">🪔 Happy Diwali! Celebrate the festival of lights with us ✨</div>
+<div id="premium-banner" class="feature-banner">🔥 Enjoy the Premium Experience</div>
+
+<section id="hero" class="hero">
+  <video id="hero-video" muted loop playsinline preload="auto">
+    <source src="The Witcher.mp4" type="video/mp4">
+  </video>
+  <canvas id="sparkles"></canvas>
+  <div class="hero-content">
+    <div class="kicker">FEATURED TODAY</div>
+    <h1>The Witcher</h1>
+    <p>Monsters, magic and destiny collide. Discover something worth watching tonight.</p>
+    <div class="buttons">
+      <button class="btn play" onclick="alert('Playing The Witcher')">▶ Play</button>
+      <button class="btn more" onclick="document.getElementById('trending').scrollIntoView()">ⓘ More Info</button>
+    </div>
+  </div>
+</section>
+
+<section id="beta-section" class="section">
+  <h2>🏆 Top 10 Today</h2>
+  <div class="row">
+    <div class="card"><img src="Animal full movie.jpg"><span class="rank">#1</span></div>
+    <div class="card"><img src="Fighter (2024).jpg"><span class="rank">#2</span></div>
+    <div class="card"><img src="Oppenheimer.jpg"><span class="rank">#3</span></div>
+    <div class="card"><img src="poster.jpg"><span class="rank">#4</span></div>
+    <div class="card"><img src="RRR_라이즈 로어 리볼트.jpg"><span class="rank">#5</span></div>
+    <div class="card"><img src="The Dark Knight.jpg"><span class="rank">#6</span></div>
+  </div>
+</section>
+
+<section id="trending" class="section">
+  <h2>Trending Now</h2>
+  <div class="row">
+    <div class="card"><img src="you.jpg"></div>
+    <div class="card"><img src="the_platform.jpg"></div>
+    <div class="card"><img src="Peaky Blinders Poster.jpg"></div>
+    <div class="card"><img src="SWEET HOME (Poster).jpg"></div>
+    <div class="card"><img src="Narcos Movie poster Design 🎥.jpg"></div>
+    <div class="card"><img src="la casa de papel.jpg"></div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>Popular on Netflix</h2>
+  <div class="row">
+    <div class="card"><img src="Animal full movie.jpg"></div>
+    <div class="card"><img src="Fighter (2024).jpg"></div>
+    <div class="card"><img src="Oppenheimer.jpg"></div>
+    <div class="card"><img src="The Dark Knight.jpg"></div>
+    <div class="card"><img src="poster.jpg"></div>
+  </div>
+</section>
+
+<footer>© Feature Flag Demo • Sample client application</footer>
+
+<script>
+const params=new URLSearchParams(location.search);
+const API_BASE_URL=params.get('api')||'http://localhost:5001/api';
+const key='ff_demo_visitor_id';
+let visitorId=localStorage.getItem(key);
+if(!visitorId){
+  visitorId='visitor-'+(crypto.randomUUID?crypto.randomUUID():Math.random().toString(36).slice(2)+Date.now());
+  localStorage.setItem(key,visitorId);
+}
+
+const hero=document.getElementById('hero');
+const video=document.getElementById('hero-video');
+const premium=document.getElementById('premium-banner');
+const diwali=document.getElementById('diwali-banner');
+const beta=document.getElementById('beta-section');
+const canvas=document.getElementById('sparkles');
+let animation=null;
+let particles=[];
+
+async function loadFeatureFlags(){
+  try{
+    const response=await fetch(
+      `${API_BASE_URL}/public/features?environment=production&userId=${encodeURIComponent(visitorId)}`,
+      {cache:'no-store'}
+    );
+    if(!response.ok) throw new Error('HTTP '+response.status);
+    const body=await response.json();
+    const flags={};
+    (body.data||[]).forEach(flag=>flags[flag.name]=!!flag.enabled);
+    applyFlags(flags);
+  }catch(error){
+    console.warn('Feature flags unavailable:',error);
+    // The client remains usable with its normal/default appearance.
+  }
+}
+
+function applyFlags(flags){
+  const festive=!!flags.festiveMode;
+  const premiumOn=!!flags.premiumBanner;
+  const betaOn=!!flags.betaFeature;
+  const autoplay=!!flags.autoplayBanner;
+
+  premium.style.display=premiumOn?'block':'none';
+  beta.style.display=betaOn?'block':'none';
+  diwali.style.display=festive?'block':'none';
+
+  if(festive){
+    document.body.classList.add('diwali-glow');
+    startDiwali();
+  }else{
+    document.body.classList.remove('diwali-glow');
+    stopDiwali();
+  }
+
+  if(autoplay){
+    video.style.display='block';
+    hero.style.backgroundImage='none';
+    video.play().catch(()=>{});
+  }else{
+    video.pause();
+    video.currentTime=0;
+    video.style.display='none';
+    hero.style.backgroundImage="url('the-witcher-season-3840x2160-24258.jpg')";
+  }
+}
+
+function startDiwali(){
+  canvas.style.display='block';
+  canvas.width=hero.clientWidth;
+  canvas.height=hero.clientHeight;
+  if(!particles.length){
+    particles=Array.from({length:45},()=>({
+      x:Math.random()*canvas.width,
+      y:Math.random()*canvas.height,
+      r:1+Math.random()*2.5,
+      s:.2+Math.random()*.8
+    }));
+  }
+  if(animation)return;
+  const ctx=canvas.getContext('2d');
+  function frame(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    particles.forEach(p=>{
+      ctx.beginPath();
+      ctx.fillStyle='rgba(255,210,90,.8)';
+      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fill();
+      p.y+=p.s;
+      if(p.y>canvas.height){p.y=-5;p.x=Math.random()*canvas.width;}
+    });
+    animation=requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+function stopDiwali(){
+  canvas.style.display='none';
+  if(animation){cancelAnimationFrame(animation);animation=null;}
+}
+
+window.addEventListener('resize',()=>{
+  if(canvas.style.display==='block'){
+    canvas.width=hero.clientWidth;
+    canvas.height=hero.clientHeight;
+  }
+});
+
+loadFeatureFlags();
+setInterval(loadFeatureFlags,8000);
+</script>
+</body>
+</html>

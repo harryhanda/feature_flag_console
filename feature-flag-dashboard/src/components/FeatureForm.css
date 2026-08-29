@@ -1,0 +1,292 @@
+/* ==========================================
+   FeatureForm Modal Styles
+   ========================================== */
+
+.ffc-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.5);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 16px;
+  animation: ffc-modal-fade-in 0.2s ease-out;
+}
+
+.ffc-modal-card {
+  background: var(--surface);
+  border-radius: 16px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  max-width: 520px;
+  width: 100%;
+  max-height: calc(100vh - 40px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: ffc-modal-slide-up 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes ffc-modal-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes ffc-modal-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Modal Header */
+.ffc-modal-header {
+  padding: 18px 24px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ffc-modal-header h3 {
+  font-size: 16.5px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.ffc-modal-close-btn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  border-radius: 6px;
+  transition: all 0.1s;
+}
+
+.ffc-modal-close-btn:hover {
+  color: var(--c-600);
+  background: var(--c-100);
+}
+
+/* Form Body */
+.ffc-modal-form {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.ffc-modal-body {
+  padding: 24px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-height: 60vh;
+}
+
+.ffc-modal-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ffc-modal-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--c-700);
+}
+
+/* Form Fields */
+.ffc-modal-input,
+.ffc-modal-textarea,
+.ffc-env-override-select {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--border-strong);
+  background: var(--surface);
+  font-size: 14px;
+  color: var(--text-primary);
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.ffc-modal-input:focus,
+.ffc-modal-textarea:focus,
+.ffc-env-override-select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.ffc-modal-textarea {
+  min-height: 80px;
+  resize: vertical;
+  font-family: inherit;
+}
+
+.ffc-modal-input:disabled,
+.ffc-modal-textarea:disabled,
+.ffc-env-override-select:disabled {
+  background: var(--page-bg);
+  color: var(--text-muted);
+  cursor: not-allowed;
+}
+
+/* Field errors and help text */
+.ffc-modal-field-error {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--danger);
+  margin-top: 2px;
+}
+
+.ffc-modal-field-error svg {
+  flex-shrink: 0;
+}
+
+.ffc-modal-field-help {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+/* Slider and Range Inputs */
+.ffc-modal-range {
+  width: 100%;
+  height: 6px;
+  background: var(--border);
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin: 10px 0;
+}
+
+.ffc-modal-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid var(--surface);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+
+.ffc-modal-range::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+
+.ffc-modal-range-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* Checkbox State switch */
+.ffc-modal-checkbox-label {
+  display: flex;
+  gap: 12px;
+  cursor: pointer;
+  align-items: flex-start;
+}
+
+.ffc-modal-checkbox {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  border: 1px solid var(--border-strong);
+  margin-top: 3px;
+  cursor: pointer;
+  accent-color: var(--accent);
+}
+
+.ffc-modal-checkbox-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ffc-modal-checkbox-text strong {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--c-700);
+}
+
+.ffc-modal-checkbox-text span {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+/* Sub-sections within modal */
+.ffc-modal-section {
+  border-top: 1px solid var(--border);
+  padding-top: 18px;
+  margin-top: 6px;
+}
+
+.ffc-modal-section-title {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--c-700);
+  margin: 0 0 4px 0;
+}
+
+.ffc-modal-section-desc {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin: 0 0 16px 0;
+  line-height: 1.4;
+}
+
+/* Overrides lists */
+.ffc-env-overrides-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ffc-env-override-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.ffc-env-override-label {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: capitalize;
+  color: var(--c-600);
+}
+
+.ffc-env-override-select {
+  width: 180px;
+  padding: 8px 12px;
+}
+
+/* Modal Footer Actions */
+.ffc-modal-footer {
+  padding: 16px 24px;
+  border-top: 1px solid var(--border);
+  background: var(--page-bg);
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}

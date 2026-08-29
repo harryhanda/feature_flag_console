@@ -1,0 +1,535 @@
+/* ==========================================
+   Dashboard Components Common Stylesheet
+   ========================================== */
+
+.ffc-dashboard-container {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* Welcome banner */
+.ffc-welcome-banner {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px 32px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+.ffc-welcome-banner h2 {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 6px 0;
+}
+
+.ffc-welcome-banner p {
+  font-size: 14.5px;
+  color: var(--text-secondary);
+  margin: 0;
+  text-align: left;
+  font-weight: normal;
+}
+
+/* Stats grid */
+.ffc-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.ffc-stats-grid.col-5 {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+/* Stat card */
+.ffc-stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ffc-stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.04);
+}
+
+.ffc-stat-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  background: var(--page-bg);
+}
+
+.ffc-stat-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.ffc-stat-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.ffc-stat-value {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+/* Stat card border colors */
+.ffc-stat-card.border-blue { border-left: 4px solid var(--accent); }
+.ffc-stat-card.border-green { border-left: 4px solid var(--success); }
+.ffc-stat-card.border-slate { border-left: 4px solid var(--text-secondary); }
+.ffc-stat-card.border-purple { border-left: 4px solid var(--purple); }
+.ffc-stat-card.border-amber { border-left: 4px solid var(--warning); }
+.ffc-stat-card.border-red { border-left: 4px solid var(--danger); }
+.ffc-stat-card.border-cyan { border-left: 4px solid var(--info); }
+
+/* Stat card icon colors */
+.text-blue { color: var(--accent); background: var(--accent-soft); }
+.text-green { color: var(--success); background: var(--success-bg); }
+.text-slate { color: var(--text-secondary); background: var(--c-100); }
+.text-purple { color: var(--purple); background: rgba(147, 51, 234, 0.12); }
+.text-amber { color: var(--warning); background: var(--warning-bg); }
+.text-red { color: var(--danger); background: var(--danger-bg); }
+.text-cyan { color: var(--info); background: rgba(8, 145, 178, 0.12); }
+
+/* Main dashboard grid layout */
+.ffc-dashboard-grid {
+  display: flex;
+  gap: 24px;
+}
+
+.ffc-dashboard-col-8 {
+  width: 65%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.ffc-dashboard-col-4 {
+  width: 35%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Panel component */
+.ffc-panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.ffc-panel-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ffc-panel-header h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.ffc-panel-link {
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: background 0.1s;
+}
+
+.ffc-panel-link:hover {
+  background: var(--c-100);
+}
+
+.ffc-panel-body {
+  padding: 24px;
+}
+
+.ffc-panel-body.no-padding {
+  padding: 0;
+}
+
+.flex-column-gap {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Toolbar inside Panel */
+.ffc-panel-toolbar {
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--border);
+  background: var(--page-bg);
+  display: flex;
+  align-items: center;
+}
+
+.ffc-search-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  max-width: 320px;
+}
+
+.ffc-search-icon {
+  position: absolute;
+  left: 12px;
+  color: var(--text-muted);
+  font-size: 16px;
+}
+
+.ffc-search-input {
+  width: 100%;
+  padding: 9px 12px 9px 36px;
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  font-size: 13.5px;
+  color: var(--text-primary);
+  background: var(--surface);
+  outline: none;
+  box-sizing: border-box;
+}
+
+.ffc-search-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+/* Recent list widgets */
+.ffc-recent-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.ffc-recent-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--c-100);
+  cursor: pointer;
+  transition: padding-left 0.15s ease;
+}
+
+.ffc-recent-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.ffc-recent-item:first-child {
+  padding-top: 0;
+}
+
+.ffc-recent-item:hover {
+  padding-left: 6px;
+}
+
+.ffc-recent-item-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ffc-recent-item-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--c-800);
+}
+
+.ffc-text-action {
+  color: var(--accent);
+}
+
+.ffc-recent-item-desc {
+  font-size: 12.5px;
+  color: var(--text-secondary);
+  max-width: 420px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ffc-recent-time {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.ffc-no-data-text {
+  font-size: 14px;
+  color: var(--text-secondary);
+  text-align: center;
+  margin: 16px 0;
+  font-weight: normal;
+}
+
+/* Action button */
+.ffc-action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.15s ease;
+}
+
+.ffc-action-btn.sm {
+  padding: 8px 14px;
+  font-size: 13px;
+}
+
+.ffc-action-btn.primary {
+  background: var(--accent);
+  color: var(--surface);
+}
+
+.ffc-action-btn.primary:hover {
+  background: var(--accent-strong);
+}
+
+.ffc-action-btn.secondary {
+  background: var(--c-100);
+  color: var(--c-600);
+  border: 1px solid var(--border);
+}
+
+.ffc-action-btn.secondary:hover {
+  background: var(--border);
+  color: var(--text-primary);
+}
+
+.ffc-action-btn.danger {
+  background: var(--danger);
+  color: #ffffff;
+}
+
+.ffc-action-btn.danger:hover {
+  background: var(--danger-strong);
+}
+
+/* Environment progress overview */
+.ffc-env-overview {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.ffc-env-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ffc-env-name {
+  font-size: 13.5px;
+  font-weight: 600;
+  text-transform: capitalize;
+  color: var(--c-600);
+}
+
+.ffc-env-progress {
+  display: flex;
+  gap: 8px;
+}
+
+.ffc-env-progress-tag {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+  line-height: 1.2;
+}
+
+.ffc-env-progress-tag.on {
+  background: rgba(22, 163, 74, 0.1);
+  color: var(--success);
+}
+
+.ffc-env-progress-tag.off {
+  background: rgba(100, 116, 139, 0.1);
+  color: var(--text-secondary);
+}
+
+/* Recent users rows */
+.ffc-recent-users {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ffc-user-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--c-100);
+}
+
+.ffc-user-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.ffc-user-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.ffc-user-email-short {
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--c-700);
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 160px;
+}
+
+/* Read only view-only banner */
+.ffc-read-only-banner {
+  background: var(--page-bg);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--text-secondary);
+  border-radius: 12px;
+  padding: 16px 20px;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.ffc-lock-banner-icon {
+  font-size: 20px;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+.ffc-read-only-banner h4 {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 2px 0;
+}
+
+.ffc-read-only-banner p {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin: 0;
+  text-align: left;
+  font-weight: normal;
+}
+
+/* Helper flex layout utility classes */
+.flex-row { display: flex; }
+.justify-between { justify-content: space-between; }
+.align-center { align-items: center; }
+
+/* Status Badges */
+.ffc-badge-pill {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  display: inline-flex;
+}
+
+.ffc-badge-pill.on {
+  background: rgba(22, 163, 74, 0.08);
+  color: var(--success);
+  border: 1px solid rgba(22, 163, 74, 0.15);
+}
+
+.ffc-badge-pill.off {
+  background: rgba(220, 38, 38, 0.08);
+  color: var(--danger);
+  border: 1px solid rgba(220, 38, 38, 0.15);
+}
+
+.ffc-badge-pill.inherit {
+  background: rgba(100, 116, 139, 0.08);
+  color: var(--text-secondary);
+  border: 1px solid rgba(100, 116, 139, 0.15);
+}
+
+/* ==========================================
+   Responsive rules
+   ========================================== */
+
+@media (max-width: 1280px) {
+  .ffc-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .ffc-stats-grid.col-5 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 1024px) {
+  .ffc-dashboard-grid {
+    flex-direction: column;
+  }
+  .ffc-dashboard-col-8,
+  .ffc-dashboard-col-4 {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .ffc-stats-grid.col-5 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .ffc-welcome-banner {
+    padding: 16px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .ffc-stats-grid,
+  .ffc-stats-grid.col-5 {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,12 @@
+/* Global app-level resets. Page/role-specific styling now lives in
+   styles/theme.css plus each page/shell's own CSS file. */
+body {
+  margin: 0;
+  font-family: var(--font-body, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif);
+  background: var(--page-bg, #f9fafb);
+  color: var(--text-primary, #1e293b);
+}
+
+* {
+  box-sizing: border-box;
+}

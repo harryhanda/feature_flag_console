@@ -1,0 +1,261 @@
+/* ==========================================
+   Redesigned Settings Stylesheet
+   ========================================== */
+
+.ffc-settings-container {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.ffc-settings-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 24px;
+  align-items: start;
+}
+
+/* Card components */
+.ffc-settings-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 24px;
+  overflow: hidden;
+}
+
+.ffc-settings-card:last-child {
+  margin-bottom: 0;
+}
+
+.ffc-settings-card-header {
+  padding: 18px 24px;
+  border-bottom: 1px solid var(--c-100);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ffc-settings-header-icon {
+  font-size: 18px;
+  color: var(--text-secondary);
+}
+
+.ffc-settings-card-header h3 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.ffc-settings-card-body {
+  padding: 24px;
+}
+
+/* Profile details settings */
+.ffc-settings-profile-body {
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+}
+
+.ffc-settings-large-avatar {
+  width: 72px;
+  height: 72px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: var(--surface);
+  border-radius: 50%;
+  font-size: 28px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 20px -5px rgba(59, 130, 246, 0.3);
+}
+
+.ffc-settings-profile-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.ffc-settings-profile-info h4 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+  text-transform: capitalize;
+}
+
+.ffc-settings-profile-email {
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+  display: block;
+}
+
+.ffc-settings-profile-footer {
+  padding: 16px 24px;
+  background: var(--page-bg);
+  border-top: 1px solid var(--c-100);
+}
+
+.ffc-settings-logout-btn {
+  width: 100%;
+  padding: 10px 16px;
+  border: 1px solid var(--danger-border);
+  background: var(--danger-bg);
+  color: var(--danger);
+  border-radius: 8px;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.ffc-settings-logout-btn:hover {
+  background: var(--danger);
+  color: var(--surface);
+  border-color: var(--danger);
+}
+
+/* Form layouts */
+.ffc-settings-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.ffc-settings-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ffc-settings-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--c-600);
+}
+
+.ffc-settings-input {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--border-strong);
+  background: var(--surface);
+  font-size: 14px;
+  color: var(--text-primary);
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.ffc-settings-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.ffc-settings-input:disabled {
+  background: var(--page-bg);
+  color: var(--text-muted);
+  cursor: not-allowed;
+}
+
+/* Save settings actions */
+.ffc-settings-save-btn {
+  background: var(--accent);
+  color: var(--surface);
+  border: none;
+  border-radius: 8px;
+  padding: 11px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  margin-top: 8px;
+}
+
+.ffc-settings-save-btn:hover:not(:disabled) {
+  background: var(--accent-strong);
+}
+
+.ffc-settings-save-btn:disabled {
+  background: var(--text-muted);
+  cursor: not-allowed;
+}
+
+
+
+/* Alert Notification Banners */
+.ffc-settings-alert {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  line-height: 1.4;
+  margin-top: 10px;
+}
+
+.ffc-settings-alert.success {
+  background: var(--success-bg);
+  border: 1px solid var(--success-border);
+  color: var(--success);
+}
+
+.ffc-settings-alert.error {
+  background: var(--danger-bg);
+  border: 1px solid var(--danger-border);
+  color: var(--danger);
+}
+
+.ffc-settings-alert svg {
+  flex-shrink: 0;
+}
+
+/* Details code snippet cards */
+.ffc-details-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ffc-details-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.ffc-details-json {
+  font-family: monospace;
+  font-size: 12.5px;
+  background: var(--text-primary);
+  color: var(--accent);
+  padding: 16px;
+  border-radius: 8px;
+  margin: 0;
+  overflow-x: auto;
+  line-height: 1.5;
+}
+
+/* Responsive grid adjustments */
+@media (max-width: 1024px) {
+  .ffc-settings-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}

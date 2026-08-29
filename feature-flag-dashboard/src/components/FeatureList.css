@@ -1,0 +1,162 @@
+/* ==========================================
+   FeatureList Table Styling
+   ========================================== */
+
+.ffc-table-container {
+  width: 100%;
+  overflow-x: auto;
+  background: var(--surface);
+}
+
+.ffc-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 13.5px;
+}
+
+.ffc-table th,
+.ffc-table td {
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--c-100);
+  vertical-align: middle;
+}
+
+.ffc-table th {
+  background: var(--page-bg);
+  font-weight: 600;
+  color: var(--c-600);
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.ffc-table-row {
+  transition: background 0.15s ease;
+}
+
+.ffc-table-row:hover {
+  background: var(--page-bg);
+}
+
+.ffc-feature-name-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ffc-feature-name {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.ffc-rollout-badge {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--accent);
+  background: rgba(37, 99, 235, 0.08);
+  border: 1px solid rgba(37, 99, 235, 0.2);
+  padding: 2px 6px;
+  border-radius: 4px;
+  width: fit-content;
+}
+
+.ffc-feature-desc-cell {
+  max-width: 260px;
+}
+
+.ffc-feature-desc {
+  display: block;
+  font-size: 13px;
+  color: var(--text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ffc-feature-date {
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.text-right {
+  text-align: right;
+}
+
+/* Row Action Buttons */
+.ffc-row-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ffc-row-action-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.ffc-row-action-btn:hover {
+  color: var(--text-primary);
+  background: var(--c-100);
+  border-color: var(--border-strong);
+}
+
+/* Edit action */
+.ffc-row-action-btn.edit:hover {
+  color: var(--accent);
+  background: rgba(37, 99, 235, 0.05);
+  border-color: rgba(37, 99, 235, 0.2);
+}
+
+/* Delete action */
+.ffc-row-action-btn.delete:hover {
+  color: var(--danger);
+  background: rgba(220, 38, 38, 0.05);
+  border-color: rgba(220, 38, 38, 0.2);
+}
+
+/* Toggle Switch button */
+.ffc-row-action-btn.toggle {
+  font-size: 22px;
+  border: none;
+  background: none;
+  width: auto;
+  height: auto;
+  padding: 0;
+  color: var(--text-muted);
+}
+
+.ffc-row-action-btn.toggle:hover {
+  background: none;
+  color: var(--text-secondary);
+}
+
+.ffc-row-action-btn.toggle.on {
+  color: var(--success);
+}
+
+.ffc-row-action-btn.toggle.on:hover {
+  color: var(--success-strong);
+}
+
+/* Read only state avatar */
+.ffc-action-read-only-icon {
+  font-size: 16px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+}
