@@ -109,7 +109,7 @@ footer{padding:35px 42px 55px;color:#777;font-size:12px}
 
 <script>
 const params=new URLSearchParams(location.search);
-const API_BASE_URL=params.get('api')||'http://localhost:5001/api';
+const API_BASE_URL=params.get('api')||'https://feature-flag-console.onrender.com/api';
 const key='ff_demo_visitor_id';
 let visitorId=localStorage.getItem(key);
 if(!visitorId){
