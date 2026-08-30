@@ -1,137 +1,522 @@
-# Feature Flag Console
+# 🚩 Feature Flag Console
 
-A MERN feature-flag management platform: React admin dashboard + Express/MongoDB API with JWT auth, role-based access control, percentage rollouts, per-environment overrides, audit logging, and a public read-only evaluation API consumed by a demo client.
+A full-stack **Feature Flag Management System** built with the MERN stack.
 
-This README reflects what is **actually implemented** in this repo — not aspirational features.
+Manage feature flags from an admin dashboard, control their rollout across environments, and see changes reflected in a separate live demo application.
 
-## Architecture
+## 🚀 Try It Live
 
+### 🎮 Live Demo
+
+👉 **[Open the Feature Flag Demo](https://feature-flag-console-pjid.vercel.app/)**
+
+The demo is a Netflix-style client application that consumes the public feature-flag evaluation API.
+
+### 🖥️ Admin Dashboard
+
+👉 **[Open the Admin Dashboard](https://feature-flag-console-lovat.vercel.app/)**
+
+Use the dashboard to create, update, enable, disable, and configure feature flags.
+
+### 💻 Source Code
+
+👉 **[GitHub Repository](https://github.com/harryhanda/feature_flag_console)**
+
+### ⚙️ Backend API
+
+👉 **[Backend API](https://feature-flag-console.onrender.com)**
+
+---
+
+## 🎯 What This Project Does
+
+Feature flags allow developers to change application behavior **without redeploying the application**.
+
+This project provides:
+
+* A React-based admin dashboard
+* An Express + Node.js backend
+* MongoDB Atlas for persistent storage
+* JWT authentication
+* Role-based access control
+* Feature flag management
+* Environment-specific configuration
+* Percentage-based rollouts
+* Public feature evaluation API
+* Audit logging
+* A separate live demo client
+
+The demo client continuously checks the public evaluation API, allowing feature changes made from the dashboard to appear in the demo without redeploying the demo application.
+
+---
+
+## ✨ Main Features
+
+### 🔐 Authentication
+
+* User registration
+* Login / logout
+* JWT authentication
+* Password change
+* Current-user endpoint
+
+### 👥 Role-Based Access Control
+
+The system supports:
+
+```text
+Admin
+  ↓
+Developer
+  ↓
+Viewer
 ```
-feature-flag-dashboard/   React (Create React App) admin UI — never talks to MongoDB directly
-backend/                  Express + Mongoose API — the only thing that talks to MongoDB
-demo_client/              Static HTML/JS page that demonstrates flags changing app behavior
-                           live, without redeploying, via the public evaluation API
+
+Different roles receive different permissions for managing the system.
+
+### 🚩 Feature Flags
+
+Create and manage feature flags with:
+
+* Feature name
+* Enabled / disabled state
+* Percentage rollout
+* Environment-specific overrides
+
+Supported environments:
+
+```text
+Development
+Staging
+Production
 ```
 
-## What's implemented
+### 📊 Percentage Rollouts
 
-- JWT auth: register (always creates a `viewer`), login, logout, change password, `/me`
-- RBAC: `admin` > `developer` > `viewer`, enforced **server-side** on every route
-- Feature flags: CRUD, `enabled`, `rollout` (0-100), optional per-environment overrides
-  (`development` / `staging` / `production`)
-- Deterministic percentage rollout (SHA-256 based on feature name + a stable bucket key —
-  no `Math.random()`, so a given user always gets the same result)
-- Audit log for create/update/delete/role-change, with filtering by user/action/feature/date
-- Public, unauthenticated evaluation API (`/api/public/features`) that exposes only
-  `{ name, enabled }` — used by the demo client instead of any hardcoded token
-- Centralized error handling, `/health` check, CORS allowlist, rate limiting, security headers
-- Self-role-change / self-delete protection for admins
+Features can be gradually released to users.
 
-## Not implemented (by design, to avoid overengineering)
+For example:
 
-- Redis (nothing in this codebase referenced it; nothing to remove or fake)
-- Swagger/OpenAPI UI — see `backend/API.md` for a plain-text API reference instead
-- Real-time push updates — the demo client polls the public API every few seconds instead
+```text
+Feature: New Checkout
 
-## Local development
+Rollout: 25%
 
-### Backend
+→ Approximately 25% of eligible users receive the feature
+```
+
+The rollout uses deterministic evaluation, meaning the same user consistently receives the same result.
+
+### 📝 Audit Logging
+
+Important management actions are recorded, including:
+
+* Feature creation
+* Feature updates
+* Feature deletion
+* Role changes
+
+### 🌐 Public Evaluation API
+
+The demo client does not require an authentication token.
+
+It consumes:
+
+```text
+GET /api/public/features
+```
+
+Example:
+
+```text
+https://feature-flag-console.onrender.com/api/public/features?environment=production&userId=visitor-test123
+```
+
+The API returns the resolved feature state for the requested environment and user.
+
+---
+
+# 🏗️ Architecture
+
+```text
+                    ┌──────────────────────┐
+                    │   Admin Dashboard     │
+                    │      React/Vercel     │
+                    └──────────┬───────────┘
+                               │
+                               │ REST API
+                               ▼
+                    ┌──────────────────────┐
+                    │      Backend API     │
+                    │   Express + Node.js   │
+                    │       Render         │
+                    └──────────┬───────────┘
+                               │
+                               │ Mongoose
+                               ▼
+                    ┌──────────────────────┐
+                    │     MongoDB Atlas    │
+                    └──────────────────────┘
+
+
+                    ┌──────────────────────┐
+                    │    Demo Client       │
+                    │      HTML / JS       │
+                    │       Vercel         │
+                    └──────────┬───────────┘
+                               │
+                               │ Public Evaluation API
+                               ▼
+                    ┌──────────────────────┐
+                    │      Backend API     │
+                    └──────────────────────┘
+```
+
+The frontend and demo client never connect directly to MongoDB. The backend is responsible for database access.
+
+---
+
+# 🔄 How Feature Flags Work
+
+The basic flow is:
+
+```text
+1. Developer creates a feature flag
+              ↓
+2. Flag is stored in MongoDB
+              ↓
+3. Dashboard updates the flag
+              ↓
+4. Demo client requests resolved flags
+              ↓
+5. Backend evaluates:
+      • enabled state
+      • environment
+      • rollout percentage
+              ↓
+6. Backend returns:
+      { name, enabled }
+              ↓
+7. Demo client changes its UI
+```
+
+### Example
+
+Suppose the dashboard contains:
+
+```text
+premiumBanner
+```
+
+If the flag is enabled:
+
+```text
+premiumBanner = true
+```
+
+the demo displays the Premium Experience banner.
+
+If it is disabled:
+
+```text
+premiumBanner = false
+```
+
+the banner disappears.
+
+This demonstrates how feature flags can control production behavior without redeploying the client.
+
+---
+
+# 🧪 Try The Demo
+
+You can test the system yourself.
+
+### Step 1
+
+Open the:
+
+👉 **[Admin Dashboard](YOUR_ADMIN_DASHBOARD_URL_HERE)**
+
+### Step 2
+
+Login with a valid account.
+
+### Step 3
+
+Open the:
+
+👉 **[Live Demo](https://feature-flag-console-pjid.vercel.app/)**
+
+### Step 4
+
+Change a feature flag from the dashboard.
+
+For example:
+
+```text
+premiumBanner
+festiveMode
+betaFeature
+autoplayBanner
+```
+
+### Step 5
+
+Return to the demo.
+
+The demo periodically requests the latest resolved feature state from the backend and updates the UI.
+
+🎯 **No demo redeployment is required.**
+
+---
+
+# 🛠️ Tech Stack
+
+## Frontend
+
+* React
+* JavaScript
+* HTML / CSS
+* Vercel
+
+## Backend
+
+* Node.js
+* Express.js
+* JWT
+* Mongoose
+* bcrypt
+* Render
+
+## Database
+
+* MongoDB Atlas
+
+## Demo Client
+
+* HTML
+* CSS
+* JavaScript
+* Vercel
+
+## Development
+
+* Git
+* GitHub
+* Jest
+* Supertest
+
+---
+
+# 📁 Project Structure
+
+```text
+feature_flag_console/
+│
+├── backend/
+│   ├── models/
+│   ├── routes/
+│   ├── middleware/
+│   ├── services/
+│   ├── tests/
+│   └── server.js
+│
+├── feature-flag-dashboard/
+│   ├── src/
+│   ├── public/
+│   └── package.json
+│
+├── demo_client/
+│   ├── index.html
+│   ├── images/
+│   ├── videos/
+│   └── assets/
+│
+├── README.md
+└── .gitignore
+```
+
+---
+
+# ⚙️ Run Locally
+
+## 1. Clone the repository
+
+```bash
+git clone https://github.com/harryhanda/feature_flag_console.git
+cd feature_flag_console
+```
+
+## 2. Backend
+
 ```bash
 cd backend
-cp .env.example .env       # then fill in MONGO_URI and JWT_SECRET
 npm install
-npm run dev                 # http://localhost:5001
 ```
 
-### Frontend
-```bash
-cd feature-flag-dashboard
-cp .env.example .env        # REACT_APP_API_URL=http://localhost:5001/api
-npm install
-npm start                   # http://localhost:3000
+Create:
+
+```text
+.env
 ```
 
-### Demo client
-It's a static file — no build step. Serve it with any static server, e.g.:
-```bash
-cd demo_client
-npx serve .                 # or VS Code "Live Server"
-```
-Then open it with `?api=http://localhost:5001/api` if your backend isn't on the default URL, e.g.:
-`http://localhost:3000/site.html?api=http://localhost:5001/api`
+Add your own environment variables:
 
-### Tests
-```bash
-cd backend
-npm install    # pulls in jest, supertest, mongodb-memory-server
-npm test
-```
-
-## Environment variables
-
-**backend/.env**
-```
-MONGO_URI=mongodb+srv://user:password@cluster.mongodb.net/featureflags
-JWT_SECRET=<long random string>
+```env
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
 PORT=5001
 FRONTEND_URL=http://localhost:3000
 DEMO_CLIENT_URL=http://localhost:5500
 NODE_ENV=development
 ```
 
-**feature-flag-dashboard/.env**
+Start the backend:
+
+```bash
+npm run dev
 ```
+
+Backend:
+
+```text
+http://localhost:5001
+```
+
+## 3. Dashboard
+
+Open another terminal:
+
+```bash
+cd feature-flag-dashboard
+npm install
+npm start
+```
+
+Dashboard:
+
+```text
+http://localhost:3000
+```
+
+Configure:
+
+```env
 REACT_APP_API_URL=http://localhost:5001/api
 ```
 
-Never commit real values for these — only `.env.example` files with placeholders belong in git.
+## 4. Demo Client
 
-## Deployment
-
-```
-GitHub → Vercel  → React dashboard (feature-flag-dashboard)
-       → Vercel  → Demo client (demo_client) — served as a static site
-       → Render  → Express API (backend)
-                 → MongoDB Atlas
+```bash
+cd demo_client
 ```
 
-**Render (backend)**
-- Root directory: `backend`
-- Build command: `npm install`
-- Start command: `npm start`
-- Env vars: `MONGO_URI`, `JWT_SECRET`, `FRONTEND_URL`, `DEMO_CLIENT_URL`, `NODE_ENV=production`
-  (Render sets `PORT` itself)
+The demo is a static HTML/JavaScript application.
 
-**Vercel (dashboard)**
-- Root directory: `feature-flag-dashboard`
-- Framework preset: Create React App
-- Env var: `REACT_APP_API_URL=https://<your-backend>.onrender.com/api`
+It can be served using:
 
-**Vercel (demo client)**
-- Root directory: `demo_client`
-- Framework preset: Other / static
-- No env vars needed — pass `?api=https://<your-backend>.onrender.com/api` in the URL, or
-  edit `API_BASE_URL` at the top of the `<script>` in `site.html` before deploying.
+```bash
+npx serve .
+```
 
-**MongoDB Atlas**
-- Database name: `featureflags`
-- Network access: allow Render's outbound IPs (or `0.0.0.0/0` if you're on a dynamic-IP
-  Render plan — restrict later once you're on a static-IP add-on)
-- The React dashboard and demo client never connect to Atlas directly — only the backend does.
+The API can be supplied using:
 
-## API reference
+```text
+?api=http://localhost:5001/api
+```
 
-See [`backend/API.md`](backend/API.md).
+---
 
-## Known limitations / next steps
+# ☁️ Production Deployment
 
-- Rate limiting and MongoDB-connection state are per-instance (in-memory); if you scale
-  the backend horizontally, move rate limiting to Redis and rely on Atlas for connection
-  state instead of a single process's `mongoose.connection.readyState`.
-- No refresh-token rotation — JWTs are long-lived (7 days) and can't be revoked
-  server-side before they expire. Add a token blocklist (e.g. in Redis) if you need
-  instant revocation.
-- No automated CI pipeline running `npm test` on push — worth adding a GitHub Actions
-  workflow.
-- Passwords are validated for minimum length only; consider adding complexity rules if
-  this becomes a public-facing product.
+The production architecture uses:
+
+```text
+GitHub
+   │
+   ├── Vercel
+   │     └── React Admin Dashboard
+   │
+   ├── Vercel
+   │     └── Demo Client
+   │
+   └── Render
+         └── Express Backend
+                │
+                └── MongoDB Atlas
+```
+
+### Vercel
+
+The React dashboard and static demo client are deployed separately.
+
+### Render
+
+The Express backend is deployed on Render.
+
+### MongoDB Atlas
+
+MongoDB Atlas stores:
+
+* Users
+* Feature flags
+* Environment configurations
+* Audit information
+
+---
+
+# 🔐 Security
+
+The project includes:
+
+* JWT authentication
+* Password hashing
+* Role-based authorization
+* Protected backend routes
+* CORS configuration
+* Rate limiting
+* Security headers
+* Environment variables for secrets
+* Public API exposing only resolved feature state
+
+**Never commit `.env` files or real credentials to GitHub.**
+
+---
+
+# 🚧 Known Limitations / Future Improvements
+
+Possible future improvements include:
+
+* Automated CI/CD testing with GitHub Actions
+* Redis-based distributed rate limiting
+* Refresh-token rotation
+* More advanced rollout targeting
+* Real-time updates using WebSockets or Server-Sent Events
+* Additional analytics for feature usage
+
+The current demo intentionally uses polling instead of real-time push updates.
+
+---
+
+# 📚 API Documentation
+
+See:
+
+👉 **[Backend API Documentation](backend/API.md)**
+
+---
+
+# 👨‍💻 Author
+
+**Harry Handa**
+
+Computer Science Engineering — AI
+
+---
+
+## ⭐ Project
+
+If you found this project useful or interesting, consider giving the repository a ⭐ on GitHub.
+
+👉 **[Feature Flag Console — GitHub](https://github.com/harryhanda/feature_flag_console)**
